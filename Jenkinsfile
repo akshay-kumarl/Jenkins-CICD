@@ -9,7 +9,7 @@ pipeline {
                 git credentialsId: 'a577a309-0446-48fa-a031-372abed13568', url: 'https://github.com/akshay9700/carwebsite.git', branch: 'main'
             }
         }
-        stage ('build'){
+        stage ('Build'){
             steps {
                 echo 'build....'
             }
