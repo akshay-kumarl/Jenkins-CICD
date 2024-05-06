@@ -23,15 +23,17 @@ pipeline {
             steps {
                 script {
                     // Docker build command
-                    sh 'docker build -t sample .'
+                    docker build -t sample .
                 }
             }
         }
         
         stage ('running Docker Image'){
             steps {
-              sh 'docker run -d -p 3000:3000 sample'   
-            }
+               srcipt{
+              docker run -d -p 3000:3000 sample  
+              } 
+           }
         }
         stage('Deploy'){
             steps {
