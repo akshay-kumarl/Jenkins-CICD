@@ -21,20 +21,17 @@ pipeline {
         
         stage('Build Docker Image') {
             steps {
-                script {
                     // Docker build command
-                    docker build -t sample .
-                }
+                  sh  'docker build -t sample .'
             }
         }
         
         stage ('running Docker Image'){
             steps {
-               srcipt{
-              docker run -d -p 3000:3000 sample  
-              } 
+              sh 'docker run -d -p 3000:3000 sample'  
            }
         }
+
         stage('Deploy'){
             steps {
                 echo 'app running on localhost:3000'
