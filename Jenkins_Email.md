@@ -12,8 +12,9 @@ TO SEND EMAIL REGARDING JOB STATUS FROM JENKINS  ++++++++++++++++++++
 -> Once SMTP properties added then we can configure email notification as 'Post build action' in jenkins job
 
 
-for pipeline ------------------------------
+### for pipeline
 
+```
 pipeline {
  agent any 
  stages {
@@ -31,5 +32,9 @@ post{
   }
  }
 }
----------------------------------------------------------------------
+```
 
+
+### to configure Jenkins with outlook follow bellow PDF 
+
+[Jenkins Outlook mail config.pdf](https://github.com/user-attachments/files/16962291/Jenkins.Outlook.mail.config.pdf)
