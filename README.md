@@ -62,6 +62,4 @@ node {
 
 ```
 ---
-```
-https://media.licdn.com/dms/document/media/D561FAQEh36iLanzBew/feedshare-document-pdf-analyzed/0/1717069741799?e=1718236800&v=beta&t=RW035I_cuG5AgFrmrdrOQ1WiRjL0orf0Z3LKrnLzHyE
-```
+
