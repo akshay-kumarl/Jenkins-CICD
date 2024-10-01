@@ -32,6 +32,9 @@ pipeline {
 
 ```
 
+
+---
+
 ### Scripted Pipeline
 sample scripted pipeline
 
@@ -61,5 +64,5 @@ node {
 }
 
 ```
----
+
 
