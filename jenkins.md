@@ -54,3 +54,52 @@ pipeline {
     }
 }
 ```
+
+---
+
+### Sample Jenkinsfile for node application  
+
+```
+pipeline {
+    agent any
+    environment {
+        NODE_VERSION = 'NodeJS 14' // Name given in Jenkins for NodeJS installation
+    }
+    tools {
+        nodejs "${NODE_VERSION}"
+    }
+    stages {
+        stage('Clone repository') {
+            steps {
+                git branch: 'main', url: 'https://github.com/your-username/your-repository.git'
+            }
+        }
+        stage('Install dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('Run Tests') {
+            steps {
+                sh 'npm test'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'npm run build'
+            }
+        }
+        stage('Archive Artifacts') {
+            steps {
+                archiveArtifacts artifacts: 'build/**', allowEmptyArchive: true
+            }
+        }
+    }
+    post {
+        always {
+            echo 'Cleaning up workspace...'
+            cleanWs()
+        }
+    }
+}
+```
