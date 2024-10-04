@@ -1,0 +1,81 @@
+# General Structure of a Jenkins Declarative Pipeline
+
+
+```
+pipeline {
+    agent any
+    
+    environment {
+        // Define environment variables here
+        NODE_VERSION = '14.17.0'  // Example: Node.js version
+        DOCKER_IMAGE = 'my-app:latest' // Example: Docker image tag
+        ANSIBLE_HOME = '/usr/local/bin/ansible' // Example: Ansible path
+    }
+
+    tools {
+        // Define the tools needed, such as Node.js, Maven, JDK, etc.
+        nodejs NODE_VERSION
+        dockerTool 'Docker'
+        ansible 'Ansible'  // Assuming Ansible is installed and configured as a Jenkins tool
+    }
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                // Pull the code from Git repository
+                git branch: 'main', url: 'https://github.com/your-repo.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                // Install project dependencies (Example: Node.js)
+                sh 'npm install'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // Build the project (can vary based on the language and tool)
+                sh 'npm run build'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // Run tests
+                sh 'npm test'
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                // Build Docker image
+                script {
+                    docker.build(DOCKER_IMAGE)
+                }
+            }
+        }
+
+        stage('Deploy with Ansible') {
+            steps {
+                // Invoke an Ansible playbook to deploy
+                ansiblePlaybook playbook: 'deploy.yml', inventory: 'inventory.ini'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline executed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+        always {
+            // Actions that should always run, like sending notifications or cleanup
+            cleanWs() // Clean up workspace
+        }
+    }
+}
+```
