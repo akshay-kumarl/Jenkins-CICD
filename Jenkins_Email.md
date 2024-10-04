@@ -37,4 +37,4 @@ post{
 
 ### to configure Jenkins with outlook follow bellow PDF 
 
-[Jenkins Outlook mail config.pdf](https://github.com/user-attachments/files/16962291/Jenkins.Outlook.mail.config.pdf)
+Jenkins Outlook mail config.pdf > see this pdf in this folder
