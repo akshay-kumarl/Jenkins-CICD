@@ -62,7 +62,18 @@ node {
         }
     }
 }
-
 ```
 
 
+---
+
+
+## Jenkins bitnami image 
+
+to run use below command
+```
+docker run -d -p 8080:8080 --name jenkins --env JENKINS_PASSWORD=mypassword bitnami/jenkins:lates
+```
+
+username: user <br/>
+password: u can create (mypassword)
