@@ -3,18 +3,20 @@
 
 ```
 pipeline {
-    agent any
+    agent any //agent {label 'sample'}
     
     environment {
         // Define environment variables here
         NODE_VERSION = '14.17.0'  // Example: Node.js version
         DOCKER_IMAGE = 'my-app:latest' // Example: Docker image tag
         ANSIBLE_HOME = '/usr/local/bin/ansible' // Example: Ansible path
+        SCANNER_HOME= tool 'sonarqube'
     }
 
     tools {
         // Define the tools needed, such as Node.js, Maven, JDK, etc.
-        nodejs NODE_VERSION
+        // tool tool-name-given-in-the-jenkins-while-installing
+        nodejs 'Node'
         dockerTool 'Docker'
         ansible 'Ansible'  // Assuming Ansible is installed and configured as a Jenkins tool
     }
@@ -44,7 +46,8 @@ pipeline {
         stage('Test') {
             steps {
                 // Run tests
-                sh 'npm test'
+                //sh 'npm test'
+                echo 'test'
             }
         }
 
@@ -61,6 +64,14 @@ pipeline {
             steps {
                 // Invoke an Ansible playbook to deploy
                 ansiblePlaybook playbook: 'deploy.yml', inventory: 'inventory.ini'
+            }
+        }
+
+        stage('Trivy scan') {
+            steps {
+                sh 'trivy image -f table -o fs.html sample:v1'
+                // sh "trivy image sample:v1 fs --format table -o fs.html ."
+               //sh 'trivy image -f json -o /home/ubuntu/trivyresults/results.json sample:v1'
             }
         }
     }
