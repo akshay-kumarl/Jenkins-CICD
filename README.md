@@ -1,8 +1,8 @@
-# Jenkins sample repo
+# Jenkins Repository Notes
 
 ### Declarative Pipeline 
-sample declarative file
 
+sample declarative file
 ```
 pipeline {
     agent any
@@ -54,7 +54,7 @@ node {
         )
     }
     stage('Deploy') {
-        sh 'mvn deploy'
+          echo 'Deploying....'
     }
     post {
         always {
