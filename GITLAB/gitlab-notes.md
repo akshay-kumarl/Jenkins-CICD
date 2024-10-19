@@ -12,9 +12,9 @@ image: alpine:latest
 pages:
   script:
     - echo "Starting deployment to GitLab Pages"
-    - mkdir .public
-    - cp -r * .public/
-    - mv .public public
+    - mkdir .public           or mkdir public
+    - cp -r * .public/        or cp -r css images js about-us.html article.html articles.html contact-us.html index.html sitemap.html
+    - mv .public public       
   artifacts:
     paths:
       - public
