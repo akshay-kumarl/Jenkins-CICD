@@ -1,0 +1,69 @@
+pipeline {
+    agent any
+
+    parameters {
+        choice(name: 'TERRAFORM_ACTION', choices: ['apply', 'destroy'], description: 'Select the Terraform action to perform')
+    }
+
+    tools {
+        terraform 'tf'
+        dockerTool 'docker'
+    }
+
+    stages {
+         stage("git checkout"){
+            steps{
+                git credentialsId: '0001', url: 'https://github.com/akshay-kumarl/sampleproj.git', branch: 'mainbranch'
+            }
+        }
+
+        stage('Terraform Initialise') {
+             when {
+                expression { params.TERRAFORM_ACTION == 'apply' }
+            }
+            steps {
+                echo "Running terraform init..."
+                sh 'terraform init'
+            }
+        }
+
+        stage('Terraform Plan') {
+            when {
+                expression { params.TERRAFORM_ACTION == 'apply' }
+            }
+            steps {
+                echo "Running terraform plan..."
+                sh 'terraform plan -out=tfplan'
+            }
+        }
+
+        stage('Terraform Apply') {
+            when {
+                expression { params.TERRAFORM_ACTION == 'apply' }
+            }
+            steps {
+                echo "Running terraform apply..."
+                sh 'terraform apply tfplan'
+            }
+        }
+
+        stage('Terraform Destroy') {
+            when {
+                expression { params.TERRAFORM_ACTION == 'destroy' }
+            }
+            steps {
+                echo "Running terraform destroy..."
+                sh 'terraform destroy -auto-approve'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Terraform ${params.TERRAFORM_ACTION} completed successfully!"
+        }
+        failure {
+            echo "Terraform ${params.TERRAFORM_ACTION} failed."
+        }
+    }
+}
