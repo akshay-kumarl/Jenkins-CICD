@@ -1,0 +1,9 @@
+# SAMPLE GITLAB 
+
+
+run_test:    # JOB NAME
+  image:     # image on which runner runs
+  before_script:  # before_script or after_script
+   - apt-get update && apt-get install make
+  script:
+   - make test
