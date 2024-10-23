@@ -1,0 +1,24 @@
+stages:
+  - test
+  - deploy
+
+test_application:
+  stage: test
+  script:
+    - echo "Running tests..."
+    - # Add your application tests here, e.g., npm test or pytest
+
+deploy_to_aws:
+  stage: deploy
+  only:
+    - main
+  script:
+    - apt-get update -y && apt-get install -y unzip
+    - curl "https://releases.hashicorp.com/terraform/1.0.11/terraform_1.0.11_linux_amd64.zip" -o terraform.zip
+    - unzip terraform.zip && mv terraform /usr/local/bin/
+    - terraform --version
+    - terraform init
+    - terraform apply -auto-approve
+    - echo "Application deployed to AWS EC2 instance"
+  environment:
+    name: production
