@@ -9,3 +9,6 @@ Jenkins URL: https://www.jenkins.io/doc/book/getting-started/
 GitLab URL: <br/>
 https://about.gitlab.com <br/>
 https://docs.gitlab.com/ee/ci/components/
+
+GitHubActions URL: <br/>
+https://docs.github.com/en/actions/about-github-actions/
