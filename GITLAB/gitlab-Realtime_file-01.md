@@ -1,5 +1,5 @@
 # GITLAB
-## Realtime sample file 
+## Realtime sample file docker, kubernetes, java app, sonarqube
 
 ```
 stages: # List of stages for jobs, and their order of execution
