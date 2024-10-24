@@ -5,6 +5,10 @@ pipeline {
              label 'samplenode' // Specify the label of the worker node you want to run the pipeline on
          }
 
+    tools {
+        terraform 'terraform_1.9.6'  // Name from the Global Tool Configuration
+        docker 'docker'
+    } 
 
     stages {
         stage('Run on Worker Node') {
