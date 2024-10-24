@@ -1,4 +1,4 @@
-# Notes and samplefiles
+# Gitlab sample file to run static web host application 
 
 #### gitlab adding custom URL for pages 
 
@@ -21,4 +21,23 @@ pages:
       - public
   only:
     - main
+```
+---
+
+### Gitlab sample file
+
+
+```
+image: alpine:latest
+pages:
+  script:
+    - echo "Starting deployment to GitLab Pages"
+    - mkdir public
+    - cp -r css images js about-us.html article.html articles.html contact-us.html index.html sitemap.html
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
+
 ```
