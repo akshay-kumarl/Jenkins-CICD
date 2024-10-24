@@ -1,3 +1,4 @@
+# GITLab
 
 ### Root Directory
 
@@ -15,6 +16,7 @@
 └── docs/                 # Additional project documentation (if needed)
 ```
 
+---
 
 ### General Structure of .gitlab-ci.yml
 
@@ -70,20 +72,21 @@ after_script:
   - echo "Running after script"
 
 ```
+---
 
-
-Before and After Scripts (Optional):
-before_script: Commands that run before any job starts.
+Before and After Scripts (Optional):<br/>
+before_script: Commands that run before any job starts.<br/>
 after_script: Commands that run after every job (even if the job fails).
 
-Jobs:
-A job is where the actual steps for each task are defined. Each job is mapped to a specific stage. Key job attributes:
-stage: Specifies the stage this job belongs to.
-script: Contains the commands to run for the job.
-tags (Optional): Specify runners with particular tags.
-only and except (Optional): Define which branches, tags, or conditions the job should run on.
-artifacts (Optional): Defines the files or directories to pass to later jobs or to download after the pipeline runs.
-dependencies (Optional): Specifies which jobs must finish successfully before this job starts.
+
+Jobs:<br/>
+A job is where the actual steps for each task are defined. Each job is mapped to a specific stage. Key job attributes:<br/>
+stage: Specifies the stage this job belongs to.<br/>
+script: Contains the commands to run for the job.<br/>
+tags (Optional): Specify runners with particular tags.<br/>
+only and except (Optional): Define which branches, tags, or conditions the job should run on.<br/>
+artifacts (Optional): Defines the files or directories to pass to later jobs or to download after the pipeline runs.<br/>
+dependencies (Optional): Specifies which jobs must finish successfully before this job starts.<br/>
 allow_failure (Optional): If true, it allows the job to fail without affecting the overall pipeline result.
 
 
