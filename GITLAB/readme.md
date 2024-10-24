@@ -16,34 +16,57 @@
 ```
 
 
-### .gitlab-ci.yml
+### General Structure of .gitlab-ci.yml
 
 ```
+# Define stages (the order of execution)
 stages:
-  - build
-  - test
-  - deploy
+  - stage1
+  - stage2
+  - stage3
 
-build-job:
-  stage: build
-  image: node:16
+# Define global variables (optional)
+variables:
+  GLOBAL_VAR: "some_value"
+
+# Define before_script (optional): Executes commands before any job runs
+before_script:
+  - echo "Running before script"
+
+# Job 1 (runs in stage1)
+job_name_1:
+  stage: stage1
   script:
-    - npm install
-    - npm run build
+    - echo "This is Job 1 in stage1"
+  tags:
+    - runner_tag  # For specific runners (optional)
+  only:
+    - branches
+  except:
+    - tags  # Jobs will not run on tags (optional)
   artifacts:
     paths:
-      - dist/
+      - path/to/artifact  # Store artifacts for later stages (optional)
 
-test-job:
-  stage: test
+# Job 2 (runs in stage2)
+job_name_2:
+  stage: stage2
   script:
-    - npm run test
+    - echo "This is Job 2 in stage2"
+  dependencies:
+    - job_name_1  # Defines that this job depends on the artifacts of job_name_1
+  allow_failure: true  # The pipeline will continue even if this job fails
 
-deploy-job:
-  stage: deploy
+# Job 3 (runs in stage3)
+job_name_3:
+  stage: stage3
   script:
-    - echo "Deploying to production"
+    - echo "This is Job 3 in stage3"
   only:
-    - main
+    - master  # Will only run on the master branch
+
+# After_script (optional): Executes commands after any job finishes
+after_script:
+  - echo "Running after script"
 
 ```
