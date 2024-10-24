@@ -1,0 +1,85 @@
+pipeline {
+    agent any
+    
+    stages {
+        
+        stage('docker') {
+            steps {
+                echo 'Run docker...'
+                sh    'docker ps -a'
+            }
+        }
+        
+        stage('kubernetes') {
+            steps {
+                echo 'testing kubernetes... kubectl'
+                 sh 'kubectl get pods'
+            }
+        }
+    }
+}
+
+
+========================================================================
+
+pipeline {
+    agent any
+    //  environment {
+    //     AWS_ACCESS_KEY_ID = credentials('0002')  // Replace with your credentials ID
+    //     AWS_SECRET_ACCESS_KEY = credentials('0002')  // Same as above
+    //     AWS_REGION = 'ap-south-1'  // Replace with your desired AWS region
+    // }
+    // environment {
+    // KUBECONFIG = '/var/lib/jenkins/.kube/config'
+    // }
+    stages {
+        
+        stage('docker') {
+            steps {
+                echo 'Run docker...'
+                sh    'docker ps -a'
+            //   sh 'docker run -d -p 80:80 nginx'
+            }
+        }
+        stage('kubernetes') {
+            steps {
+               
+                // some block
+                echo 'testing kubernetes... kubectl'
+                 sh 'kubectl get pods'
+                
+                
+            }
+        }
+    }
+}
+
+
+==============================================================================
+
+withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: '0002', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+    // some block
+}
+
+
+==============================================================================
+
+
+Kubernetes on Jenkins 
+
+no need to mention any tool or env to run Kubernetes 
+
+If Kubernetes on a different server and Jenkins different server follow the below steps having doubts check Infra-setup repo > jenkins installation > STEP9
+
+Execute the below command in Eks Management host & copy kube config file data
+$ cat .kube/config
+COPY everything 
+
+
+Execute the below commands in Jenkins Server and paste kube config file for ubuntu user to check EKS Cluster info
+$ cd ~
+$ ls -la
+$ sudo vi .kube/config
+
+check eks nodes
+$ kubectl get nodes
