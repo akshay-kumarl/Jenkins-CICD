@@ -22,3 +22,8 @@ deploy_to_aws:
     - echo "Application deployed to AWS EC2 instance"
   environment:
     name: production
+
+
+
+# add variables to gitlab 
+access key and secret key no need to add anywhere it will take it directly from gitlab
