@@ -1,3 +1,6 @@
+
+
+```
 default:
   tags:
     - Terraform
@@ -127,3 +130,6 @@ job-run-terraform-destroy-production:
     - cd production
     - terraform init
     - terraform destroy --auto-approve
+
+```
+
